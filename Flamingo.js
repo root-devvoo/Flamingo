@@ -2,9 +2,8 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: pink; icon-glyph: dove;
 // Flamingo Widget v1.1 - by UnvsDev
-// iPhone에서도 미술의 세계로 뛰어드세요.
+// Dive into the world of art, in your iPhone.
 // Learn More: https://github.com/unvsDev/Flamingo
-// KR Version (Translated)
 
 let today = new Date()
 let fm = FileManager.iCloud()
@@ -56,30 +55,30 @@ if(config.runsInApp){
   
   const info = new UITableRow()
   info.dismissOnSelect = false
-  info.addText("플라밍고에 오신 것을 환영합니다!", "Developed by unvsDev")
+  info.addText("Welcome to Flamingo", "Developed by unvsDev")
   settings.addRow(info)
   
   const selectArtist = new UITableRow()
   selectArtist.dismissOnSelect = false
-  selectArtist.addText("미술작품 필터 설정")
+  selectArtist.addText("Set Artwork Filter")
   settings.addRow(selectArtist)
   selectArtist.onSelect = async () => {
     let alert = new Alert()
-    alert.title = "미술작품 주제 선택"
-    alert.message = "어떠한 미술작품을 위젯에 표시하고 싶나요?"
-    alert.addAction("특정 미술가의 작품")
-    alert.addAction("Artvee의 주간 추천 작품")
-    alert.addAction("특별 카테고리 작품")
-    alert.addCancelAction("취소")
+    alert.title = "Choose Topic"
+    alert.message = "What artwork do you want to show in your widget?"
+    alert.addAction("Specific Artist")
+    alert.addAction("Artvee's Weekly Pick")
+    alert.addAction("Special Collections")
+    alert.addCancelAction("Cancel")
     
     let response = await alert.present()
     if(response == 0) {
       let inAlert = new Alert()
-      inAlert.title = "미술가 검색"
-      inAlert.message = "표시할 작품의 미술가의 이름을 영어로 입력하세요."
+      inAlert.title = "Type your Artist"
+      inAlert.message = "Just type artist's name,\nlike \"Leonardo Da Vinci\"."
       inAlert.addTextField("Leonardo Da Vinci", "")
-      inAlert.addAction("완료")
-      inAlert.addCancelAction("취소")
+      inAlert.addAction("Done")
+      inAlert.addCancelAction("Cancel")
       
       if(await inAlert.present() != -1){
         prefData.artist = inAlert.textFieldValue()
@@ -107,16 +106,16 @@ if(config.runsInApp){
   
   const selectLocal = new UITableRow()
   selectLocal.dismissOnSelect = false
-  selectLocal.addText("오프라인 모드")
+  selectLocal.addText("Local Artworks")
   settings.addRow(selectLocal)
   selectLocal.onSelect = async () => {
     let alert = new Alert()
-    alert.title = "로컬 저장소에서 미술작품을 불러올까요?"
-    alert.message = "위젯이 미술작품을 미리 다운로드받아 오프라인에서 표시할 수 있습니다! 원하는 옵션을 선택하세요."
-    alert.addAction("항상 미술작품을 온라인에서 다운로드")
-    alert.addAction("로컬에 저장된 미술작품만 보여주기")
-    alert.addDestructiveAction("미술작품을 다운로드하지 않기")
-    alert.addCancelAction("취소")
+    alert.title = "Get Local Artworks?"
+    alert.message = "Widget will load only downloaded Artworks, enable you to surf through offline."
+    alert.addAction("Always download Artworks")
+    alert.addAction("Show only local Artworks")
+    alert.addDestructiveAction("Never download Artworks")
+    alert.addCancelAction("Cancel")
     
     let response = await alert.present()
     if(response != -1){
@@ -126,15 +125,15 @@ if(config.runsInApp){
   
   const selectRef = new UITableRow()
   selectRef.dismissOnSelect = false
-  selectRef.addText("리프레시 주기 설정")
+  selectRef.addText("Refresh Interval")
   settings.addRow(selectRef)
   selectRef.onSelect = async () => {
     let alert = new Alert()
-    alert.title = "리프레시 주기 입력"
-    alert.message = "iOS 정책에 의해, 예상했던 시간보다 위젯의 리프레시가 일부 변동될 수 있습니다."
-    alert.addTextField("(초)", prefData.refresh.toString())
-    alert.addAction("완료")
-    alert.addCancelAction("취소")
+    alert.title = "Refresh Interval?"
+    alert.message = "Due to iOS Widget policy, refresh could be delayed up to several hours."
+    alert.addTextField("(second)", prefData.refresh.toString())
+    alert.addAction("Done")
+    alert.addCancelAction("Cancel")
     
     let response = await alert.present()
     if(response != -1){
@@ -144,14 +143,14 @@ if(config.runsInApp){
   
   const selectTitle = new UITableRow()
   selectTitle.dismissOnSelect = false
-  selectTitle.addText("미술작품 정보 보이기")
+  selectTitle.addText("Show Artwork's Detail")
   settings.addRow(selectTitle)
   selectTitle.onSelect = async () => {
     let alert = new Alert()
-    alert.title = "미술작품 정보를 표시할까요?"
-    alert.message = "위젯에 나타나는 미술작품의 제목과 미술가를 표시합니다."
-    alert.addAction("네")
-    alert.addAction("아니요")
+    alert.title = "Show Artwork's Detail?"
+    alert.message = "Widget will show Artwork's Name and Author."
+    alert.addAction("Yes")
+    alert.addAction("No")
     
     let response = await alert.present()
     if(response != -1){
@@ -161,14 +160,14 @@ if(config.runsInApp){
   
   const selectRt = new UITableRow()
   selectRt.dismissOnSelect = false
-  selectRt.addText("리프레시 정보 보이기")
+  selectRt.addText("Show Last Refreshed Time")
   settings.addRow(selectRt)
   selectRt.onSelect = async () => {
     let alert = new Alert()
-    alert.title = "리프레시 정보를 표시할까요?"
-    alert.message = "위젯에 최근 마지막으로 리프레시된 시간을 표시합니다."
-    alert.addAction("네")
-    alert.addAction("아니요")
+    alert.title = "Show Last Refreshed Time?"
+    alert.message = "Widget will show Artwork's last refreshed time."
+    alert.addAction("Yes")
+    alert.addAction("No")
     
     let response = await alert.present()
     if(response != -1){
@@ -178,16 +177,16 @@ if(config.runsInApp){
   
   const selectLoad = new UITableRow()
   selectLoad.dismissOnSelect = false
-  selectLoad.addText("미술작품 검색 범위")
+  selectLoad.addText("Artwork Search Range")
   settings.addRow(selectLoad)
   selectLoad.onSelect = async () => {
     let alert = new Alert()
-    alert.title = "검색 범위를 설정하세요"
-    alert.message = "위젯이 설정된 범위만큼의 미술작품을 한 번에 검색합니다. 넓은 범위로 설정하면 다양한 미술작품이 표시될 수 있고, 좁은 범위로 설정하면 미술작품이 빠르게 표시될 수 있습니다. 검색 결과가 충분하지 않다면, 이 범위는 무시될 수도 있습니다."
-    alert.addAction("20 (작음)")
-    alert.addAction("50 (중간)")
-    alert.addAction("100 (큼)")
-    alert.addAction("200 (매우 큼)")
+    alert.title = "Input search range"
+    alert.message = "Widget will search this amount of artworks at once. Larger range allows you to find various artworks, However smaller range lets you see artwork faster. Remember that if there's not enough artworks, this range can be ignored."
+    alert.addAction("20 (Small)")
+    alert.addAction("50 (Medium)")
+    alert.addAction("100 (Big)")
+    alert.addAction("200 (Large)")
     alert.addCancelAction("Cancel")
     
     let response = await alert.present()
@@ -198,16 +197,16 @@ if(config.runsInApp){
   
   const resetOption = new UITableRow()
   resetOption.dismissOnSelect = true
-  resetOption.addText("데이터 초기화")
+  resetOption.addText("Reset all data")
   settings.addRow(resetOption)
   resetOption.onSelect = async () => {
     endMode = true
     let alert = new Alert()
-    alert.title = "정말 초기화하시겠어요?"
-    alert.message = "초기화 옵션을 선택하세요.\n이 작업은 되돌릴 수 없습니다."
-    alert.addDestructiveAction("위젯 설정만 초기화하기")
-    alert.addDestructiveAction("다운로드된 미술작품도 초기화하기")
-    alert.addCancelAction("취소")
+    alert.title = "Reset Confirmation"
+    alert.message = "Do you really want to reset all data? Since Thanos helps me to delete them, you cannot undo your action."
+    alert.addDestructiveAction("Delete only user data")
+    alert.addDestructiveAction("Delete all artworks with data")
+    alert.addCancelAction("No")
     
     let response = await alert.present()
     if(response == 0){
@@ -219,7 +218,7 @@ if(config.runsInApp){
   
   const saveOption = new UITableRow()
   saveOption.dismissOnSelect = true
-  saveOption.addText("저장 후 끝내기")
+  saveOption.addText("Save and quit")
   settings.addRow(saveOption)
   saveOption.onSelect = () => {
     endMode = true
@@ -372,7 +371,7 @@ if(prefData.title){
 }
 
 if(prefData.rtitle){
-  let rTitle = lStack.addText(offlineMode ? "업데이트: " + formatTime(today) : "업데이트: " + formatTime(today) + " (" + `${todayIdx + 1} / ${arts.length}` + ", ID: " + artId + ")")
+  let rTitle = lStack.addText("Last updated: " + formatTime(today) + " (" + `${todayIdx + 1} / ${arts.length}` + ", ID: " + artId + ")")
   rTitle.textColor = Color.white()
   rTitle.font = Font.lightMonospacedSystemFont(9)
 }
